@@ -59,7 +59,44 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime())
     user = db.Column(db.String(100))
     sub = db.Column(db.Integer, db.ForeignKey("sub.id"))
-    
+
+    def __init__(self, title, body, user, sub): 
+        self.title = title
+        self.body = body 
+        self.user = user 
+        self.sub = sub
+
+    # GETTER 
+    @classmethod
+    def get_post(cls, postid): 
+        post = Post.query.get(postid)
+        return post_schema.jsonify(post)
+
+    # GETTER (ALL POSTS)
+    def get_posts(cls): 
+        posts = Post.query.all()
+        return post_schema.jsonify(posts)
+
+    # SETTER
+    @classmethod
+    def create_post(cls, title, body, user, sub): 
+        new_post = Post(title, body, user, sub)
+        try: 
+            db.session.add(new_post)
+            db.session.commit()
+        except: 
+            db.session.rollback()
+            raise Exception('Session rollback')
+        return post_schema.jsonify(new_post)
+
+class PostSchema(marshmallow.Schema): 
+    class Meta: 
+        fields = ('id', 'title', 'body', 'user', 'sub')
+
+post_schema = PostSchema()
+posts_schema = PostSchema(many =  True)
+
+
 
 if __name__ == 'models': 
     db.create_all()
