@@ -49,6 +49,8 @@ class SubSchema(marshmallow.Schema):
 sub_schema = SubSchema()
 subs_schema = SubSchema(many=True)
 
+# POST MODEL GOES HERE
+
 
 if __name__ == 'models': 
     db.create_all()
