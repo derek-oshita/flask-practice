@@ -50,7 +50,16 @@ sub_schema = SubSchema()
 subs_schema = SubSchema(many=True)
 
 # POST MODEL GOES HERE
+class Post(db.Model): 
+    __table_args__ = {'extend_existing': True}
 
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(50))
+    body = db.Column(db.String(500))
+    created_at = db.Column(db.DateTime())
+    user = db.Column(db.String(100))
+    sub = db.Column(db.Integer, db.ForeignKey("sub.id"))
+    
 
 if __name__ == 'models': 
     db.create_all()
