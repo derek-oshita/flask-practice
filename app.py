@@ -1,9 +1,26 @@
 import os 
 
-# remember syntax and capital 'F' when importing this module
-from flask import Flask
+from flask import Flask 
+from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
 
-app = Flask('__name__')
+app = Flask(__name__)
+
+# SET BASE DIRECTORY 
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+# SQLITE DATABASE
+DATABASE = 'sqlite:///' + os.path.join(basedir, 'db.reddit')
+
+# SETUP DATABASE
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# INIT DATABASE
+db = SQLAlchemy(app)
+
+# INIT MARSHMALLOW
+marshmallow = Marshmallow(app)
 
 DEBUG = True
 PORT = 8000
