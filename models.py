@@ -1,4 +1,6 @@
 from app import db, marshmallow
+from flask import jsonify
+from marshmallow import fields
 
 # import datetime as dt
 
@@ -20,8 +22,8 @@ class Sub(db.Model):
 
     # THIS DECORATOR EXISTS SO YOU CAN CREATE CLASS METHODS THAT ARE PASSED THE ACTUAL CLASS OBJ WITHIN THE FUNCTION CALL 
     @classmethod
+    # SETTER METHOD FOR VALIDATION AND ABSTRACTION (AVOID DIRECT ACCESS OF A CLASS FIELD/PRIVATE FIELDS)
     def create_sub(cls, name, description): 
-        sub = Sub.query.get(subid)
         new_sub = Sub(name, description)
         try: 
             db.session.add(new_sub)
@@ -31,6 +33,7 @@ class Sub(db.Model):
             raise Exception('Session rollback')
         return sub_schema.jsonify(new_sub)
 
+    # GETTER METHOD FOR VALIDATION
     @classmethod 
     def get_sub(cls, subid): 
         sub = Sub.query.get(subid)
