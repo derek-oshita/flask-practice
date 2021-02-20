@@ -1,4 +1,4 @@
-from app import db, marshmallow
+from flask_practice_app import db, marshmallow
 from flask import jsonify
 from marshmallow import fields
 
