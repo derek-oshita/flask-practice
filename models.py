@@ -153,6 +153,18 @@ class Comment(db.Model):
             raise Exception("Session rollback...")
         return comment_schema.jsonify(new_comment)
 
+    # GET COMMENT 
+    @classmethod 
+    def get_comment(cls, commentid): 
+        comment = Comment.query.get(commentid)
+        return comment_schema.jsonify(comment)
+
+    # GET COMMENTS 
+    @classmethod 
+    def get_comments(cls): 
+        comments = Comment.query.all()
+        return comments_schema.jsonify(comments)
+
 
 # COMMENT SCHEMA 
 class CommentSchema(marshmallow.Schema): 
