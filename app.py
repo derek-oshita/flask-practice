@@ -75,6 +75,7 @@ def update_or_delete_post(postid=None):
 
 # COMMENT
 @app.route('/comment', methods=['POST', 'GET'])
+@app.route('/comment/<commentid>', methods=['GET'])
 def create_comment(commentid=None): 
     from models import Comment
     if commentid == None and request.method == "POST":
@@ -82,8 +83,13 @@ def create_comment(commentid=None):
         text = request.json["text"]
         post = request.json["post"]
         return Comment.create_comment(title, text, post)
+    elif commentid != None and request.method == "GET":
+        return Comment.get_comment(commentid)
     else: 
         return Comment.get_comments()
+
+# @app.route('/comment/<commentid>', methods=["PUT", "DELETE"])
+
 
 
     
