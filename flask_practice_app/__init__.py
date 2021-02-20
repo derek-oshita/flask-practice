@@ -22,9 +22,6 @@ db = SQLAlchemy(app)
 # INIT MARSHMALLOW
 marshmallow = Marshmallow(app)
 
-
-# ROUTES GO HERE
+# ROUTES
 from flask_practice_app import routes
 
-# if __name__ == '__main__': 
-#     app.run(debug=DEBUG, port=PORT)

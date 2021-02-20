@@ -5,18 +5,16 @@ from flask_marshmallow import Marshmallow
 
 from flask_practice_app.models import Sub, Post, Comment
 
-
 # HOME
 @app.route('/')
 def hello_world(): 
     return 'Hello world...'
 
-# CREATE SUB
+##########################################################################################################################################
+# SUB - GET / POST
 @app.route('/sub', methods=['POST', 'GET'])
-# GET SUB W/ ID
 @app.route('/sub/<subid>', methods=['GET'])
 def create_sub(subid = None): 
-    # from models import Sub
     if subid== None and request.method == 'GET': 
         return Sub.get_subs()
     elif subid == None: 
@@ -26,11 +24,11 @@ def create_sub(subid = None):
     else: 
         return Sub.get_sub(subid)
 
-# GET POSTS
+##########################################################################################################################################
+# POST - GET / POST
 @app.route('/post', methods=['POST', 'GET'])
 @app.route('/post/<postid>', methods=['GET'])
 def create_post(postid = None): 
-    # from models import Post
     if postid == None and request.method == 'GET': 
         return Post.get_posts()
     elif postid == None: 
@@ -42,21 +40,20 @@ def create_post(postid = None):
     else: 
         return Post.get_post(postid)
 
-# UPDATE / DELETE POST
+# POST - UPDATE / DELETE
 @app.route('/post/<postid>', methods=['PUT', 'DELETE'])
 def update_or_delete_post(postid=None): 
-    # from models import Post
     if request.method == 'PUT': 
         req = request.get_json()
         return Post.update_post(postid, **req)
     else: 
         return Post.delete_post(postid)
 
-# COMMENT
+##########################################################################################################################################
+# COMMENT - GET /POST
 @app.route('/comment', methods=['POST', 'GET'])
 @app.route('/comment/<commentid>', methods=['GET'])
 def create_comment(commentid=None): 
-    # from models import Comment
     if commentid == None and request.method == "POST":
         title = request.json["title"]
         text = request.json["text"]
@@ -67,9 +64,9 @@ def create_comment(commentid=None):
     else: 
         return Comment.get_comments()
 
+# COMMENT - UPDATE / DELETE 
 @app.route('/comment/<commentid>', methods=["PUT", "DELETE"])
 def update_or_delete_comment(commentid): 
-    # from models import Comment
     if request.method == "PUT": 
         req = request.get_json()
         return Comment.update_comment(commentid, **req)
