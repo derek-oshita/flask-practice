@@ -8,7 +8,8 @@ from flask_practice_app.models import Sub, Post, Comment
 # HOME
 @app.route('/')
 def hello_world(): 
-    return render_template('base.html')
+    title = "HOMIEEEE"
+    return render_template('home.html', title=title)
 
 ##########################################################################################################################################
 # SUB - GET / POST
