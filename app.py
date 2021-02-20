@@ -94,6 +94,8 @@ def update_or_delete_comment(commentid):
     if request.method == "PUT": 
         req = request.get_json()
         return Comment.update_comment(commentid, **req)
+    else: 
+        return Comment.delete_comment(commentid)
 
 
 

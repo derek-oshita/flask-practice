@@ -178,6 +178,13 @@ class Comment(db.Model):
         db.session.commit()
         return comment_schema.jsonify(comment)
 
+    @classmethod 
+    def delete_comment(cls, commentid): 
+        comment = Comment.query.get(commentid)
+        db.session.delete(comment)
+        db.session.commit()
+        return comment_schema.jsonify(comment)
+
 
 
 # COMMENT SCHEMA 
@@ -189,7 +196,5 @@ comment_schema = CommentSchema()
 comments_schema = CommentSchema(many=True)
 
 
-
-# THIS TELLS FLASK-SQL ALCHEMY 
 if __name__ == 'models': 
     db.create_all()
