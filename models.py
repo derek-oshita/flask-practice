@@ -77,10 +77,11 @@ class Post(db.Model):
         post = Post.query.get(postid)
         return post_schema.jsonify(post)
 
-#     # GETTER (ALL POSTS)
-#     def get_posts(cls): 
-#         posts = Post.query.all()
-#         return post_schema.jsonify(posts)
+    # GETTER (ALL POSTS)
+    @classmethod
+    def get_posts(cls): 
+        posts = Post.query.all()
+        return posts_schema.jsonify(posts)
 
     # SETTER
     @classmethod
