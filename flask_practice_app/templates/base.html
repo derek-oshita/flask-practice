@@ -10,17 +10,29 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}">
 
-
-    <title>Flask Practice App</title>
+    <title>Flaskr - Practice App</title>
 </head>
 <body>
     <!-- NAV BAR -->
     <header>
-        <div class="container-fluid">
-
-
-        </div>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a href="#" class="navbar-brand">Flaskr</a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Subscribers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Posts</a>
+                    </li>
+                </ul>
+            </nav>
     </header>
-    
+
+    <!-- FOOTER -->
+    <nav id="footer" class="navbar fixed-bottom navbar-dark bg-dark text-center">
+        <div class="container text-center">
+            <p class="navbar-text col-md-12 col-sm-12 col-xs-12" href="#">Derek Oshita &copy; 2021</p>
+        </div>
+    </nav>
 </body>
 </html>
