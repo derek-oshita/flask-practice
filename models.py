@@ -165,6 +165,20 @@ class Comment(db.Model):
         comments = Comment.query.all()
         return comments_schema.jsonify(comments)
 
+    # UPDATE COMMENTS (see what happens when we don't set to NONE)
+    @classmethod 
+    def update_comment(cls, commentid, title, text, post): 
+        comment = Comment.query.get(commentid)
+        if title != None: 
+            comment.title = title
+        if text != None: 
+            comment.text = text
+        if post != None: 
+            comment.post = post 
+        db.session.commit()
+        return comment_schema.jsonify(comment)
+
+
 
 # COMMENT SCHEMA 
 class CommentSchema(marshmallow.Schema): 
