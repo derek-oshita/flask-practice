@@ -31,6 +31,7 @@ PORT = 8000
 @app.route('/')
 def hello_world(): 
     return 'Hello world...'
+
 # CREATE SUB
 @app.route('/sub', methods=['POST'])
 # GET SUB W/ ID
@@ -45,6 +46,12 @@ def create_sub(subid = None):
     
     else: 
         return Sub.get_sub(subid)
+
+# @app.route('/post', methods=['POST'])
+# def create_post(): 
+#     from models import Post
+    
+
 
 
 if __name__ == '__main__': 

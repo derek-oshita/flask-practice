@@ -66,16 +66,16 @@ class Post(db.Model):
         self.user = user 
         self.sub = sub
 
-    # GETTER 
+    # GETTER (SINGLE POST)
     @classmethod
     def get_post(cls, postid): 
         post = Post.query.get(postid)
         return post_schema.jsonify(post)
 
-    # GETTER (ALL POSTS)
-    def get_posts(cls): 
-        posts = Post.query.all()
-        return post_schema.jsonify(posts)
+#     # GETTER (ALL POSTS)
+#     def get_posts(cls): 
+#         posts = Post.query.all()
+#         return post_schema.jsonify(posts)
 
     # SETTER
     @classmethod
@@ -89,26 +89,27 @@ class Post(db.Model):
             raise Exception('Session rollback')
         return post_schema.jsonify(new_post)
 
-    # DELETE
-    @classmethod 
-    def delete_post(cls, postid): 
-        post = Post.query.get(postid)
-        db.session.delete(post)
-        db.session.commit()
-        return post_schema.jsonify(post)
+#     # DELETE
+#     @classmethod 
+#     def delete_post(cls, postid): 
+#         post = Post.query.get(postid)
+#         db.session.delete(post)
+#         db.session.commit()
+#         return post_schema.jsonify(post)
 
-    # UPDATE
-    @classmethod
-    def update_post(cls, postid, title=None, body=None, user=None, sub=None)
-        post = Post.query.get(postid)
-        if title != None: 
-            post.title = title
-        if body != None: 
-            post.body = body 
-        if user != None: 
-            post.user = user
-        db.session.commit()
-        return post_schema.jsonify(post)
+
+#     # UPDATE
+#     @classmethod
+#     def update_post(cls, postid, title=None, body=None, user=None, sub=None)
+#         post = Post.query.get(postid)
+#         if title != None: 
+#             post.title = title
+#         if body != None: 
+#             post.body = body 
+#         if user != None: 
+#             post.user = user
+#         db.session.commit()
+#         return post_schema.jsonify(post)
     
 # POST SCHEMA
 class PostSchema(marshmallow.Schema): 
@@ -119,6 +120,6 @@ post_schema = PostSchema()
 posts_schema = PostSchema(many =  True)
 
 
-
+# THIS TELLS FLASK-SQL ALCHEMY 
 if __name__ == 'models': 
     db.create_all()
