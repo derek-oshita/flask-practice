@@ -49,6 +49,7 @@ def create_sub(subid = None):
 
 # GET POSTS
 @app.route('/post', methods=['POST', 'GET'])
+@app.route('/post/<postid>', methods=['GET'])
 def create_post(postid = None): 
     from models import Post
     if postid == None and request.method == 'GET': 
@@ -59,6 +60,18 @@ def create_post(postid = None):
         user = request.json['user']
         sub = request.json['sub']
         return Post.create_post(title, body, user, sub)
+    else: 
+        return Post.get_post(postid)
+
+# UPDATE / DELETE POST
+@app.route('/post/<postid>', methods=['PUT', 'DELETE'])
+def update_or_delete_post(postid=None): 
+    from models import Post
+    if request.method == 'PUT': 
+        req = request.get_json()
+        return Post.update_post(postid, **req)
+    else: 
+        return Post.delete_post(postid)
     
 
 
