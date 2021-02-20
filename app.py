@@ -47,9 +47,15 @@ def create_sub(subid = None):
     else: 
         return Sub.get_sub(subid)
 
-# @app.route('/post', methods=['POST'])
-# def create_post(): 
-#     from models import Post
+@app.route('/post', methods=['POST'])
+def create_post(postid = None): 
+    from models import Post
+    if postid == None: 
+        title = request.json['title']
+        body = request.json['body']
+        user = request.json['user']
+        sub = request.json['sub']
+        return Post.create_post(title, body, user, sub)
     
 
 

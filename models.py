@@ -61,7 +61,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(50))
     body = db.Column(db.String(500))
-    created_at = db.Column(db.DateTime())
+    # created_at = db.Column(db.DateTime())
     user = db.Column(db.String(100))
     sub = db.Column(db.Integer, db.ForeignKey("sub.id"))
 
