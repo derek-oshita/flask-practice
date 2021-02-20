@@ -129,7 +129,7 @@ posts_schema = PostSchema(many =  True)
 
 # COMMENT MODEL
 class Comment(db.Model): 
-    __table_args__ = {'extend-existing' = True}
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50))
