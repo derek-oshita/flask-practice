@@ -33,17 +33,17 @@ def hello_world():
     return 'Hello world...'
 
 # CREATE SUB
-@app.route('/sub', methods=['POST'])
+@app.route('/sub', methods=['POST', 'GET'])
 # GET SUB W/ ID
 @app.route('/sub/<subid>', methods=['GET'])
 def create_sub(subid = None): 
     from models import Sub
-    if subid == None: 
+    if subid== None and request.method == 'GET': 
+        return Sub.get_subs()
+    elif subid == None: 
         name = request.json['name']
         description = request.json['description']
-
         return Sub.create_sub(name, description)
-    
     else: 
         return Sub.get_sub(subid)
 

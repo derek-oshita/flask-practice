@@ -39,6 +39,11 @@ class Sub(db.Model):
         sub = Sub.query.get(subid)
         return sub_schema.jsonify(sub)
 
+    @classmethod 
+    def get_subs(cls): 
+        subs = Sub.query.all()
+        return subs_schema.jsonify(subs)
+
 
 # SCHEMA SET UP USING MARSHMALLOW BECAUSE IT USES CLASSES RATHER THAN DICTIONARIES (EASY CODE REUSE AND CONFIGURATION)
 # YOU CAN USE THIS LIBRARY TO DICTATE WHAT FIELDS WILL BE SENT BACK TO THE USER IN RESPONSE
