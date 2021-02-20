@@ -92,7 +92,7 @@ def create_comment(commentid=None):
 def update_or_delete_comment(commentid): 
     from models import Comment
     if request.method == "PUT": 
-        req = requst.get_json()
+        req = request.get_json()
         return Comment.update_comment(commentid, **req)
 
 
