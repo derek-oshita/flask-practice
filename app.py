@@ -72,6 +72,10 @@ def update_or_delete_post(postid=None):
         return Post.update_post(postid, **req)
     else: 
         return Post.delete_post(postid)
+
+# COMMENT
+# @app.route('/comment', method=['GET', 'POST'])
+
     
 
 

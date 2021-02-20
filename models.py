@@ -127,6 +127,42 @@ class PostSchema(marshmallow.Schema):
 post_schema = PostSchema()
 posts_schema = PostSchema(many =  True)
 
+# COMMENT MODEL
+class Comment(db.Model): 
+    __table_args__ = {'extend-existing' = True}
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    text = db.Column(db.String(300))
+    post = db.Column(db.Integer, db.ForeignKey("post.id"))
+
+    def __init__(self, title, text, post): 
+        self.title = title
+        self.text = text
+        self.post = post
+
+    # CREATE COMMENT 
+    @classmethod
+    def create_comment(cls, title, text, post): 
+        new_comment = Comment(title, text, post)
+        try: 
+            db.session.add(new_comment)
+            db.session.commit()
+        except: 
+            db.session.rollback()
+            raise Exception("Session rollback...")
+        return comment_schema.jsonify(new_comment)
+
+
+# COMMENT SCHEMA 
+class CommentSchema(marshmallow.Schema): 
+    class Meta: 
+        fields = ('id', 'title', 'text', 'post')
+
+comment_schema = CommentSchema()
+comments_schema = CommentSchema(many=True)
+
+
 
 # THIS TELLS FLASK-SQL ALCHEMY 
 if __name__ == 'models': 
