@@ -1,5 +1,5 @@
 from flask_practice_app import app
-from flask import Flask, request
+from flask import Flask, request, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 
@@ -8,7 +8,7 @@ from flask_practice_app.models import Sub, Post, Comment
 # HOME
 @app.route('/')
 def hello_world(): 
-    return 'Hello world...'
+    return render_template('base.html')
 
 ##########################################################################################################################################
 # SUB - GET / POST
