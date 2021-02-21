@@ -39,11 +39,13 @@ class Sub(db.Model):
         sub = Sub.query.get(subid)
         return sub_schema.jsonify(sub)
 
+    # I WASN'T ABLE TO USE THIS CLASS METHOD BECAUSE JSONIFY PRODUCED A FULL RESPONSE OBJECT, NOT A BODY, WHICH MEANS IT WASN'T ITERABLE
     @classmethod 
     def get_subs(cls): 
         subs = Sub.query.all()
-        return subs_schema.jsonify(subs)
-
+        # JSONIFY TURNS OUTPUT INTO RESPONSE OBJECT, BUT IT WASN'T ITERABLE IN TEMPLATE
+        # return subs_schema.jsonify(subs)
+        return subs
 
 # SCHEMA SET UP USING MARSHMALLOW BECAUSE IT USES CLASSES RATHER THAN DICTIONARIES (EASY CODE REUSE AND CONFIGURATION)
 # YOU CAN USE THIS LIBRARY TO DICTATE WHAT FIELDS WILL BE SENT BACK TO THE USER IN RESPONSE
@@ -61,7 +63,6 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(50))
     body = db.Column(db.String(500))
-    # created_at = db.Column(db.DateTime())
     user = db.Column(db.String(100))
     sub = db.Column(db.Integer, db.ForeignKey("sub.id"))
 
@@ -102,7 +103,6 @@ class Post(db.Model):
         db.session.delete(post)
         db.session.commit()
         return post_schema.jsonify(post)
-
 
     # UPDATE
     @classmethod

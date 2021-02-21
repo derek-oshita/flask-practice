@@ -8,7 +8,7 @@ from flask_practice_app.models import Sub, Post, Comment
 # HOME
 @app.route('/')
 def hello_world(): 
-    title = "HOMIEEEE"
+    title = 'Practice App'
     return render_template('home.html', title=title)
 
 ##########################################################################################################################################
@@ -17,7 +17,12 @@ def hello_world():
 @app.route('/sub/<subid>', methods=['GET'])
 def create_sub(subid = None): 
     if subid== None and request.method == 'GET': 
-        return Sub.get_subs()
+        # THIS WORKS
+        # subscribers = Sub.query.all()
+        # THIS DOES NOT
+        subscribers = Sub.get_subs()
+        # return render_template('subscribers.html', subscribers=subscribers)
+        return subscribers
     elif subid == None: 
         name = request.json['name']
         description = request.json['description']

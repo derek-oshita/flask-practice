@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+<!-- MAIN CONTAINER -->
+<div class="row">
+{% for sub in subscribers %}
+
+<div class="col">{{ sub.name }}</div>
+
+
+<div class="w-100"></div>
+{% endfor %}
+</div>
+
+
+
+
+
+
+
+{% endblock %}
