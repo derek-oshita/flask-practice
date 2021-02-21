@@ -4,10 +4,10 @@
 <!-- MAIN CONTAINER -->
 <div class="row">
 {% for sub in subscribers %}
-
-<div class="col">{{ sub.name }}</div>
-
-
+<div class="col border border-dark rounded mb-10 bg-light">
+    <p><strong>{{sub.name}}</strong></p>
+    <p>Description: {{sub.description}}</p>
+</div>
 <div class="w-100"></div>
 {% endfor %}
 </div>

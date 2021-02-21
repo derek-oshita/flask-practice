@@ -45,6 +45,7 @@ class Sub(db.Model):
         subs = Sub.query.all()
         # JSONIFY TURNS OUTPUT INTO RESPONSE OBJECT, BUT IT WASN'T ITERABLE IN TEMPLATE
         # return subs_schema.jsonify(subs)
+        # this will send a LIST
         return subs
 
 # SCHEMA SET UP USING MARSHMALLOW BECAUSE IT USES CLASSES RATHER THAN DICTIONARIES (EASY CODE REUSE AND CONFIGURATION)

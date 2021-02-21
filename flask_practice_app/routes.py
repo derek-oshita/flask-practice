@@ -17,12 +17,8 @@ def hello_world():
 @app.route('/sub/<subid>', methods=['GET'])
 def create_sub(subid = None): 
     if subid== None and request.method == 'GET': 
-        # THIS WORKS
-        # subscribers = Sub.query.all()
-        # THIS DOES NOT
         subscribers = Sub.get_subs()
-        # return render_template('subscribers.html', subscribers=subscribers)
-        return subscribers
+        return render_template('subscribers.html', subscribers=subscribers)
     elif subid == None: 
         name = request.json['name']
         description = request.json['description']
